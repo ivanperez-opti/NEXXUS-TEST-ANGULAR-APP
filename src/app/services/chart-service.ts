@@ -28,6 +28,27 @@ export class ChartService {
     };
   }
 
+ onCreate(callback: (sale: Schema['Sales']['type']) => void) {
+    return this.client.models.Sales.onCreate().subscribe({
+      next: (result) => callback(result),
+      error: (err) => console.error("Error onCreate:", err)
+    });
+  }
+
+  onUpdate(callback: (sale: Schema['Sales']['type']) => void) {
+    return this.client.models.Sales.onUpdate().subscribe({
+      next: (result) => callback(result),
+      error: (err) => console.error("Error onUpdate:", err)
+    });
+  }
+
+  onDelete(callback: (sale: Schema['Sales']['type']) => void) {
+    return this.client.models.Sales.onDelete().subscribe({
+      next: (result) => callback(result),
+      error: (err) => console.error("Error onDelete:", err)
+    });
+  }
+
   async createSale(month: string, year: number, total: number, items: number) {
     const result = await this.client.models.Sales.create({
       month, 
