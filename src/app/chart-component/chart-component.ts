@@ -27,11 +27,11 @@ export class ChartComponent {
 
   constructor(private chartService: ChartService) {}
 
-  ngOnInit() {
-    this.chartService.getChartData().subscribe(data => {
-      this.barChartData.labels = data.labels;
-      this.barChartData.datasets = data.datasets;
-    });
+  async ngOnInit() {
+    const chartData = await this.chartService.getSalesForChart();
+
+    this.barChartData.labels = chartData.labels;
+    this.barChartData.datasets = chartData.datasets;
   }
 
 }

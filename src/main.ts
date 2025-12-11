@@ -3,6 +3,10 @@ import { appConfig } from './app/app.config';
 import { App } from './app/app';
 import { provideRouter } from '@angular/router';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { Amplify } from 'aws-amplify';
+import outputs from './amplify_outputs.json';
+
+Amplify.configure(outputs);
 
 // bootstrapApplication(App,{
 //   providers: [provideCharts(withDefaultRegisterables())],
