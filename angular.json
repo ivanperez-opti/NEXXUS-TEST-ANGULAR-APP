@@ -23,7 +23,8 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/amplify_outputs.json"
             ],
             "styles": [
               "src/styles.css"
