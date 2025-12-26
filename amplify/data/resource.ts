@@ -14,7 +14,9 @@ const schema = a.schema({
       total: a.float().required(),
       items: a.integer().required()
     })
-    .authorization((allow) => [allow.guest()])
+    .authorization((allow) => [
+      allow.publicApiKey().to(['read', "create", "update", "delete"])
+    ]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -22,8 +24,8 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: 'identityPool',
-  },
+    defaultAuthorizationMode: "apiKey"
+  }
 });
 
 /*== STEP 2 ===============================================================

@@ -1,0 +1,77 @@
+.log-panel {
+  background: linear-gradient( #23277D, #020617);
+  color: #e5e7eb;
+  border-radius: 10px;
+  padding: 12px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Header */
+.log-header {
+  display: grid;
+  grid-template-columns: 90px 90px 1fr;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #94a3b8;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #334155;
+  
+}
+
+/* Body */
+.log-body {
+  margin-top: 8px;
+  overflow-y: auto;
+  flex: 1;
+  background: #020617;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid #1e293b;
+}
+
+/* Rows */
+.log-row {
+  display: grid;
+  grid-template-columns: 90px 90px 1fr;
+  padding: 6px 4px;
+  font-size: 13px;
+  align-items: center;
+  border-bottom: 1px solid #1e293b;
+}
+
+/* Columns */
+.time {
+  font-variant-numeric: tabular-nums;
+  color: #cbd5f5;
+}
+
+.level {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.msg {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Levels */
+.INFO {
+  color: #38bdf8;
+}
+
+.SUCCESS {
+  color: #4ade80;
+}
+
+.WARN {
+  color: #facc15;
+}
+
+.ERROR {
+  color: #f87171;
+}

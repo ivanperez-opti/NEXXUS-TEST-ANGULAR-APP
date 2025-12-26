@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { SalesService } from './services/sales-service';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,5 @@ import { RouterOutlet } from '@angular/router';
 export class App {
   // protected readonly title = signal('AngularChartApp');
   protected readonly title = signal('AngularChartApp');
+  constructor(private salesService: SalesService) {}
 }

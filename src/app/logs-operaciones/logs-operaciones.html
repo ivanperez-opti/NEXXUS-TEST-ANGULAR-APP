@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="log-panel">
+  <div class="log-header">
+    <span>Hora</span>
+    <span>Tag</span>
+    <span>Mensaje</span>
+  </div>
+
+  <div class="log-body">
+    <div *ngFor="let log of logs$ | async" class="log-row" [ngClass]="log.level">
+      <span class="time">{{ log.timestamp | date:'HH:mm:ss' }}</span>
+      <span class="level">{{ log.level }}</span>
+      <span class="msg">{{ log.message }}</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
