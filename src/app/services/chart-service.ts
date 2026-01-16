@@ -10,7 +10,7 @@ export class ChartService {
     const result = await this.client.models.Sales.list();
     const sales = result.data ?? [];
 
-    // Ordenar por año/mes (opcional)
+    // Ordenar por año/mes
     const ordered = sales.sort((a, b) =>
       a.year === b.year
         ? a.month.localeCompare(b.month)

@@ -15,7 +15,5 @@ export const appConfig: ApplicationConfig = {
     provideCharts(withDefaultRegisterables()),
     provideHttpClient(),
     SalesService
-    
-    // withEventReplay()
   ]
 };
