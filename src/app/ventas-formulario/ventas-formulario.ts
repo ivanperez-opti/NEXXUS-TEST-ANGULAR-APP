@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 
 export class VentasFormulario {
-  API_URL = "https://7udods6ojbdjznexn2fcdf6rwi.appsync-api.us-east-1.amazonaws.com/graphql"
+  API_URL = "https://lpyfzqr2evab3gd2dvrdchf6wa.appsync-api.us-east-1.amazonaws.com/graphql"
   API_KEY = "da2-od2zpp7oxbftlbfbmblyzc7fha"
 
   formCreate = {
