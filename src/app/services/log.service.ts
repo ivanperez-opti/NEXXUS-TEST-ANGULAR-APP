@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { LogData } from './log-data';
 
 export type LogLevel = 'INFO' | 'SUCCESS' | 'WARN' | 'ERROR';
 
@@ -12,6 +13,8 @@ export interface AppLog {
 
 @Injectable({ providedIn: 'root' })
 export class LogService {
+
+  constructor(private logData: LogData) {}
 
   private readonly STORAGE_KEY = 'APP_LOGS';
   private logs$ = new BehaviorSubject<AppLog[]>(this.loadFromStorage());
@@ -32,7 +35,10 @@ export class LogService {
 
     this.logs$.next(updated);
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(updated));
+
+    this.logData.saveLog(newLog);
   }
+  
 
   clear() {
     this.logs$.next([]);

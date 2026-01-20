@@ -1,6 +1,8 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, HostListener, signal } from '@angular/core';
+import { RouterOutlet, NavigationEnd, Router } from '@angular/router';
 import { SalesService } from './services/sales-service';
+import { LogService } from './services/log.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +10,20 @@ import { SalesService } from './services/sales-service';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
+
 export class App {
   // protected readonly title = signal('AngularChartApp');
   protected readonly title = signal('AngularChartApp');
-  constructor(private salesService: SalesService) {}
+  constructor(private salesService: SalesService, private logService: LogService, private router: Router,) {  
+    this.router.events
+      .pipe(filter(e => e instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.logService.log(
+          `Cambio de pestaña: ${event.urlAfterRedirects}`,
+          'INFO',
+          'NAV'
+        );
+      });
+    }
 }
+
