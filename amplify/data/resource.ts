@@ -18,8 +18,8 @@ const schema = a.schema({
       level: a.string().required(),      // INFO | SUCCESS | WARN | ERROR
       message: a.string().required(),
       source: a.string(),
-      timestamp: a.datetime().required(),
-      sessionId: a.string().required(),
+      timestamp: a.datetime(),
+      sessionId: a.string(),
       userAgent: a.string(),
     })
     .authorization((allow) => [

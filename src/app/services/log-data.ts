@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
-import { generateClient } from 'aws-amplify/api';
 import { from, map, Observable } from 'rxjs';
 import { AppLog } from './log.service';
 import { Amplify } from 'aws-amplify';
+import { generateClient } from 'aws-amplify/api';
 
-/* ===== CONFIG LOCAL ===== */
+
 Amplify.configure({
   API: {
     GraphQL: {
-      endpoint: 'https://7udods6ojbdjznexn2fcdf6rwi.appsync-api.us-east-1.amazonaws.com/graphql',
+      endpoint: 'https://7udodsjznexn2fcdf6rwi.appsync-api.us-east-1.amazonaws.com/graphql',
       region: 'us-east-1',
       defaultAuthMode: 'apiKey',
-      apiKey: 'da2-3iisacj5dzgkxb7fyucbpn3xhq',
+      apiKey: 'TU_API_KEY',
     },
   },
 });
 
 const client = generateClient();
 
-/* ===== MUTATION ===== */
-const CREATE_LOG = /* GraphQL */ `
+const CREATE_LOG = `
   mutation CreateLogs($input: CreateLogsInput!) {
     createLogs(input: $input) {
       id
@@ -27,34 +26,31 @@ const CREATE_LOG = /* GraphQL */ `
   }
 `;
 
-/* ===== QUERY ===== */
-const LIST_LOGS = /* GraphQL */ `
+const LIST_LOGS = `
   query ListLogs {
-      listLogs {
-        items {
-          id
-          level
-          message
-          source
-          timestamp
-        }
+    listLogs {
+      items {
+        id
+        level
+        message
+        source
+        timestamp
       }
     }
+  }
 `;
 
 @Injectable({ providedIn: 'root' })
 export class LogData {
-
-  saveLog(log: AppLog): Observable<unknown> {
+ saveLog(log: AppLog): Observable<any> {
     return from(
       client.graphql({
         query: CREATE_LOG,
-        authMode: 'apiKey',
         variables: {
           input: {
-            level: log.level,
-            message: log.message,
-            source: log.source,
+            level: log.level ?? 'INFO',
+            message: log.message ?? '',
+            source: log.source ?? 'APP',
             timestamp: log.timestamp.toISOString(),
           },
         },
@@ -64,26 +60,16 @@ export class LogData {
 
   getLogs(): Observable<AppLog[]> {
     return from(
-      client.graphql({
-        query: LIST_LOGS,
-        authMode: 'apiKey',
-      }) as Promise<any>
+      client.graphql({ query: LIST_LOGS }) as Promise<any>
     ).pipe(
-      map(res => {
-        if (res.errors) {
-          console.error('GraphQL errors:', res.errors);
-          throw res.errors;
-        }
-
-        return (res.data?.listLogs?.items ?? []).map(
-          (l: any): AppLog => ({
-            level: l.level,
-            message: l.message,
-            source: l.source ?? undefined,
-            timestamp: new Date(l.timestamp),
-          })
-        );
-      })
+      map(res =>
+        res.data.listLogs.items.map((l: any) => ({
+          level: l.level,
+          message: l.message,
+          source: l.source,
+          timestamp: new Date(l.timestamp),
+        }))
+      )
     );
   }
 }
