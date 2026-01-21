@@ -28,15 +28,16 @@ const CREATE_LOG = `
 
 const LIST_LOGS = `
   query ListLogs {
-    listLogs {
-      items {
-        level
-        message
-        source
-        timestamp
+      listLogs {
+        items {
+          id
+          level
+          message
+          source
+          timestamp
+        }
       }
     }
-  }
 `;
 
 @Injectable({ providedIn: 'root' })
@@ -65,18 +66,23 @@ export class LogData {
       client.graphql({
         query: LIST_LOGS,
         authMode: 'apiKey',
-      })
+      }) as Promise<any>
     ).pipe(
-      map((res: any) =>
-        (res.data.listLogs.items ?? []).map(
+      map(res => {
+        if (res.errors) {
+          console.error('GraphQL errors:', res.errors);
+          throw res.errors;
+        }
+
+        return (res.data?.listLogs?.items ?? []).map(
           (l: any): AppLog => ({
             level: l.level,
             message: l.message,
             source: l.source ?? undefined,
             timestamp: new Date(l.timestamp),
           })
-        )
-      )
+        );
+      })
     );
   }
 }

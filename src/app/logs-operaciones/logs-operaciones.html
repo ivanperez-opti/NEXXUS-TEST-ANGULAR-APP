@@ -1,25 +1,26 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <div class="log-panel">
-  <div class="log-header">
-    <span>Hora</span>
-    <span>Tag</span>
-    <span>Mensaje</span>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="log-panel">
+      <div class="log-header">
+        <span style="margin-right: 20%;">Hora</span>
+        <span style="margin-left: 20%;">Tag</span>
+        <span>Mensaje</span>
+      </div>
+      <div class="log-body">
+        <div *ngFor="let log of logs" class="log-row" [ngClass]="log.level">
+          <small>{{ log.timestamp | date: 'short' }}</small>
+          <strong style="margin-left: 20%;">{{ log.level }}</strong>
+          {{ log.message }}
+        </div>
 
-  <div class="log-body">
-    <div *ngFor="let log of logs" class="log-row" [ngClass]="log.level">
-      <strong>{{ log.level }}</strong>
-      {{ log.message }}
-      <small>{{ log.timestamp | date:'short' }}</small>
+        <div *ngIf="logs.length === 0" class="empty">No hay logs registrados</div>
+      </div>
     </div>
-  </div>
-</div>
-</body>
+  </body>
 </html>
