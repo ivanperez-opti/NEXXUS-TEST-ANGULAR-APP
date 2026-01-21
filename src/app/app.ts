@@ -12,7 +12,6 @@ import { filter } from 'rxjs/operators';
 })
 
 export class App {
-  // protected readonly title = signal('AngularChartApp');
   protected readonly title = signal('AngularChartApp');
   constructor(private salesService: SalesService, private logService: LogService, private router: Router,) {}
 

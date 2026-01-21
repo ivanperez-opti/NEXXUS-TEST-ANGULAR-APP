@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LogData } from './log-data';
 
-/* ===== TIPOS ===== */
 export type LogLevel = 'INFO' | 'SUCCESS' | 'WARN' | 'ERROR';
 
 export interface AppLog {

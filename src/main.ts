@@ -12,10 +12,8 @@ async function start() {
 
   const outputs = await res.json();
 
-  // 🔥 Configurar Amplify UNA sola vez
   Amplify.configure(outputs);
 
-  // 🔥 Arrancar Angular después
   await bootstrapApplication(App, appConfig);
 }
 

@@ -4,7 +4,7 @@ import { from, map, Observable } from 'rxjs';
 import { AppLog } from './log.service';
 import { Amplify } from 'aws-amplify';
 
-/* ===== CONFIG LOCAL ===== */
+
 Amplify.configure({
   API: {
     GraphQL: {
@@ -18,8 +18,7 @@ Amplify.configure({
 
 const client = generateClient();
 
-/* ===== MUTATION ===== */
-const CREATE_LOG = /* GraphQL */ `
+const CREATE_LOG = `
   mutation CreateLogs($input: CreateLogsInput!) {
     createLogs(input: $input) {
       id
@@ -27,8 +26,7 @@ const CREATE_LOG = /* GraphQL */ `
   }
 `;
 
-/* ===== QUERY ===== */
-const LIST_LOGS = /* GraphQL */ `
+const LIST_LOGS = `
   query ListLogs {
     listLogs {
       items {
@@ -44,22 +42,23 @@ const LIST_LOGS = /* GraphQL */ `
 @Injectable({ providedIn: 'root' })
 export class LogData {
 
-  saveLog(log: AppLog): Observable<unknown> {
+  saveLog(log: AppLog) {
     return from(
       client.graphql({
         query: CREATE_LOG,
         authMode: 'apiKey',
         variables: {
           input: {
-            level: log.level,
-            message: log.message,
-            source: log.source,
+            level: log.level ?? 'INFO',
+            message: log.message ?? '',
+            source: log.source ?? 'APP',
             timestamp: log.timestamp.toISOString(),
           },
         },
       })
     );
   }
+
 
   getLogs(): Observable<AppLog[]> {
     return from(
