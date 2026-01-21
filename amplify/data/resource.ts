@@ -19,7 +19,7 @@ const schema = a.schema({
       message: a.string().required(),
       source: a.string(),
       timestamp: a.datetime().required(),
-      sessionId: a.string(),
+      sessionId: a.string().required(),
       userAgent: a.string(),
     })
     .authorization((allow) => [
