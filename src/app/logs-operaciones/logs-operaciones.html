@@ -14,10 +14,10 @@
   </div>
 
   <div class="log-body">
-    <div *ngFor="let log of logs$ | async" class="log-row" [ngClass]="log.level">
-      <span class="time">{{ log.timestamp | date:'HH:mm:ss' }}</span>
-      <span class="level">{{ log.level }}</span>
-      <span class="msg">{{ log.message }}</span>
+    <div *ngFor="let log of logs" class="log-row" [ngClass]="log.level">
+      <strong>{{ log.level }}</strong>
+      {{ log.message }}
+      <small>{{ log.timestamp | date:'short' }}</small>
     </div>
   </div>
 </div>

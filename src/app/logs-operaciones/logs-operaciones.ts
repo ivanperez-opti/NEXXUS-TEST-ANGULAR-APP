@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppLog, LogService } from '../services/log.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-logs-operaciones',
@@ -12,15 +11,13 @@ import { Observable } from 'rxjs';
 })
 export class LogsOperacionesComponent implements OnInit {
 
-logs$!: Observable<AppLog[]>;
+  logs: AppLog[] = [];
 
-constructor(private logService: LogService) {}
+  constructor(private logService: LogService) {}
 
   ngOnInit() {
-    this.logs$ = this.logService.getLogs();
-  }
-
-  clearLogs() {
-    this.logService.clear();
+    this.logService.getLogs().subscribe(logs => {
+      this.logs = logs;
+    });
   }
 }

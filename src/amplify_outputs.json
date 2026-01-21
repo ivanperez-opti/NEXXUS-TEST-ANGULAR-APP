@@ -1,9 +1,9 @@
 {
   "auth": {
-    "user_pool_id": "us-east-1_W12z8IYDH",
+    "user_pool_id": "us-east-1_carsRsAUi",
     "aws_region": "us-east-1",
-    "user_pool_client_id": "5h4hak61o83uq4091uesbiacvb",
-    "identity_pool_id": "us-east-1:a8c0e2a6-147c-4dad-b91e-704161a150b5",
+    "user_pool_client_id": "5kk6qotoos1n5djnkiv2sv9gdd",
+    "identity_pool_id": "us-east-1:57da07c3-f7cb-4686-bf91-a803329263c4",
     "mfa_methods": [],
     "standard_required_attributes": [
       "email"
@@ -26,9 +26,9 @@
     "unauthenticated_identities_enabled": true
   },
   "data": {
-    "url": "https://lpyfzqr2evab3gd2dvrdchf6wa.appsync-api.us-east-1.amazonaws.com/graphql",
+    "url": "https://7udods6ojbdjznexn2fcdf6rwi.appsync-api.us-east-1.amazonaws.com/graphql",
     "aws_region": "us-east-1",
-    "api_key": "da2-od2zpp7oxbftlbfbmblyzc7fha",
+    "api_key": "da2-3iisacj5dzgkxb7fyucbpn3xhq",
     "default_authorization_type": "API_KEY",
     "authorization_types": [
       "AMAZON_COGNITO_USER_POOLS",
@@ -123,7 +123,6 @@
             "sortKeyFieldNames": []
           }
         },
-        
         "Logs": {
           "name": "Logs",
           "fields": {

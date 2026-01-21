@@ -14,16 +14,18 @@ import { filter } from 'rxjs/operators';
 export class App {
   // protected readonly title = signal('AngularChartApp');
   protected readonly title = signal('AngularChartApp');
-  constructor(private salesService: SalesService, private logService: LogService, private router: Router,) {  
+  constructor(private salesService: SalesService, private logService: LogService, private router: Router,) {}
+
+  ngOnInit() {
     this.router.events
-      .pipe(filter(e => e instanceof NavigationEnd))
+      .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.logService.log(
-          `Cambio de pestaña: ${event.urlAfterRedirects}`,
+          `Cambio de pestaña a ${event.urlAfterRedirects}`,
           'INFO',
-          'NAV'
+          'ROUTER'
         );
       });
-    }
+  }
 }
 
