@@ -2,6 +2,7 @@ import { Component, HostListener, signal } from '@angular/core';
 import { RouterOutlet, NavigationEnd, Router } from '@angular/router';
 import { AppLog, LogService } from './services/log.service';
 import { filter } from 'rxjs/operators';
+import { SalesService } from './services/sales-service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class App {
 
   logs: AppLog[] = [];
   protected readonly title = signal('AngularChartApp');
-  constructor(private logService: LogService, private router: Router,) {}
+  constructor( private salesService: SalesService, private logService: LogService, private router: Router,) {}
 
   ngOnInit() {
     this.router.events
