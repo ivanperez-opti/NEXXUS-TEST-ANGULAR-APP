@@ -58,18 +58,24 @@ export class LogData {
     );
   }
 
-  getLogs(): Observable<AppLog[]> {
-    return from(
-      client.graphql({ query: LIST_LOGS }) as Promise<any>
-    ).pipe(
-      map(res =>
-        res.data.listLogs.items.map((l: any) => ({
+getLogs(): Observable<AppLog[]> {
+  return from(
+    client.graphql({ query: LIST_LOGS }) as Promise<any>
+  ).pipe(
+    map(res => {
+      const items = res.data?.listLogs?.items ?? [];
+
+      return items
+        .map((l: any): AppLog => ({
           level: l.level,
           message: l.message,
           source: l.source,
           timestamp: new Date(l.timestamp),
         }))
-      )
-    );
-  }
+        .sort((a: AppLog, b: AppLog) =>
+            b.timestamp.getTime() - a.timestamp.getTime()
+          );
+    })
+  );
+}
 }
